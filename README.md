@@ -1,2 +1,15 @@
-# endless-gifs
-Search engine that utilizes the GIPHY API and displays gifs to the user
+## GIF Search Engine
+
+## Installation
+#### 1. Install Dependencies:
+
+```sh
+$ npm install
+```
+
+#### 2. Run the Application:
+
+```sh
+$ npm start
+```
+You're Done!
