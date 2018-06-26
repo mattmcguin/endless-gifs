@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import Masonry from "react-masonry-component";
 import Gif from "./Gif";
 
-const Grid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 100%;
+const Grid = styled(Masonry)`
+    margin: 0 auto;
     padding: 1rem 3rem;
 
     @media (max-width: 450px) {
@@ -31,19 +27,18 @@ const InformativeText = styled.h1`
 `;
 
 const _Grid = ({ list, infoText, ...rest }) => {
+    if (list.length === 0)
+        return (
+            <InformativeTextWrapper>
+                <InformativeText>{infoText}</InformativeText>
+            </InformativeTextWrapper>
+        );
+
     return (
-        <Grid>
-            {list.length > 0 ? (
-                list.map((gif, index) => {
-                    return (
-                        <Gif key={gif.slug} gif={gif} index={index} {...rest} />
-                    );
-                })
-            ) : (
-                <InformativeTextWrapper>
-                    <InformativeText>{infoText}</InformativeText>
-                </InformativeTextWrapper>
-            )}
+        <Grid options={{ columnWidth: 345, fitWidth: true }}>
+            {list.map((gif, index) => {
+                return <Gif key={gif.slug} gif={gif} index={index} {...rest} />;
+            })}
         </Grid>
     );
 };

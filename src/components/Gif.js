@@ -21,7 +21,6 @@ const OriginalImage = styled.img`
     z-index: 2;
     height: 100%;
     width: 100%;
-    min-height: 12rem;
 
     opacity: 0;
 
@@ -43,8 +42,8 @@ const ImageContainer = styled.div`
 
 const GifContainer = styled.div`
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 320px;
+    margin: 0 0.5rem 1rem 0.5rem;
 
     &:hover ${ImageContainer} {
         transform: scale(1.025) !important;
@@ -84,7 +83,7 @@ class Gif extends Component {
                     previewGif={gif.images.preview_gif.url}
                 >
                     <OriginalImage
-                        src={gif.images.original.url}
+                        src={gif.images.fixed_width.url}
                         alt={gif.title}
                         innerRef={element => (this.loadedGif = element)}
                         onLoad={this.adjustStyles}
