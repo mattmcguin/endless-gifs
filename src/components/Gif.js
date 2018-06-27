@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import LazyLoad from "react-lazyload";
 
 const GifButton = styled.button`
     position: absolute;
@@ -88,14 +87,12 @@ class Gif extends Component {
                     color={colors[index % colors.length]}
                     previewGif={gif.images.preview_gif.url}
                 >
-                    <LazyLoad>
-                        <OriginalImage
-                            src={gif.images.fixed_width.url}
-                            alt={gif.title}
-                            innerRef={element => (this.loadedGif = element)}
-                            onLoad={this.adjustStyles}
-                        />
-                    </LazyLoad>
+                    <OriginalImage
+                        src={gif.images.fixed_width.url}
+                        alt={gif.title}
+                        innerRef={element => (this.loadedGif = element)}
+                        onLoad={this.adjustStyles}
+                    />
                 </ImageContainer>
                 <GifButton type="button">{buttonText}</GifButton>
             </GifContainer>
