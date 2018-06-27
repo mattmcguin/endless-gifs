@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import LazyLoad from "react-lazyload";
 
 const GifButton = styled.button`
     position: absolute;
@@ -42,7 +43,8 @@ const ImageContainer = styled.div`
 
 const GifContainer = styled.div`
     position: relative;
-    width: 320px;
+    height: ${props => props.height + "px"};
+    width: 300px;
     margin: 0 0.5rem 1rem 0.5rem;
 
     &:hover ${ImageContainer} {
@@ -75,19 +77,25 @@ class Gif extends Component {
 
     render() {
         const { gif, index, add, action, buttonText } = this.props;
+        const HEIGHT = Number(gif.images.fixed_width.height) * 1.5;
         return (
-            <GifContainer onClick={() => action(add ? gif : index)}>
+            <GifContainer
+                height={HEIGHT}
+                onClick={() => action(add ? gif : index)}
+            >
                 <ImageContainer
                     innerRef={element => (this.container = element)}
                     color={colors[index % colors.length]}
                     previewGif={gif.images.preview_gif.url}
                 >
-                    <OriginalImage
-                        src={gif.images.fixed_width.url}
-                        alt={gif.title}
-                        innerRef={element => (this.loadedGif = element)}
-                        onLoad={this.adjustStyles}
-                    />
+                    <LazyLoad>
+                        <OriginalImage
+                            src={gif.images.fixed_width.url}
+                            alt={gif.title}
+                            innerRef={element => (this.loadedGif = element)}
+                            onLoad={this.adjustStyles}
+                        />
+                    </LazyLoad>
                 </ImageContainer>
                 <GifButton type="button">{buttonText}</GifButton>
             </GifContainer>

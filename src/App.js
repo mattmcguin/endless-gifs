@@ -48,6 +48,9 @@ export default class App extends Component {
             favoritesList: [],
             tab: "home"
         };
+    }
+
+    componentDidMount() {
         this.loadTrendingGifs();
     }
 

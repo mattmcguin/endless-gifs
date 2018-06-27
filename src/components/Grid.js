@@ -5,11 +5,7 @@ import Gif from "./Gif";
 
 const Grid = styled(Masonry)`
     margin: 0 auto;
-    padding: 1rem 3rem;
-
-    @media (max-width: 450px) {
-        padding: 1rem;
-    }
+    padding: 1rem 0rem;
 `;
 
 const InformativeTextWrapper = styled.div`
@@ -35,7 +31,10 @@ const _Grid = ({ list, infoText, ...rest }) => {
         );
 
     return (
-        <Grid options={{ columnWidth: 345, fitWidth: true }}>
+        <Grid
+            options={{ columnWidth: 320, fitWidth: true }}
+            updateOnEachImageLoad={true}
+        >
             {list.map((gif, index) => {
                 return <Gif key={gif.slug} gif={gif} index={index} {...rest} />;
             })}
